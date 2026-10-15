@@ -32,7 +32,7 @@ export const BottomNavBar: React.FC<BottomNavBarProps> = ({
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-40 bg-slate-950/95 backdrop-blur-xl border-t border-white/10 safe-bottom">
+    <nav className="fixed bottom-0 left-0 right-0 z-40 bg-[#070b14] border-t border-white/10 safe-bottom">
       <div className="max-w-md mx-auto grid grid-cols-3 items-center h-16 px-4">
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id;

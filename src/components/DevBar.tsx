@@ -26,7 +26,7 @@ export const DevBar: React.FC<DevBarProps> = ({
 
   return (
     <div className="fixed top-14 inset-x-3 sm:inset-x-auto sm:right-4 sm:w-96 z-50 animate-in slide-in-from-top-2 duration-200">
-      <div className="rounded-2xl p-4 bg-slate-900/95 border border-white/20 shadow-2xl backdrop-blur-2xl text-left space-y-3">
+      <div className="rounded-2xl p-4 bg-slate-900 border border-white/20 shadow-2xl text-left space-y-3">
         <div className="flex items-center justify-between pb-2 border-b border-white/10">
           <div className="flex items-center gap-2 text-slate-200 text-xs font-bold">
             <Wrench className="w-4 h-4 text-emerald-400" />

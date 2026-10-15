@@ -82,7 +82,7 @@ export const EncouragementModal: React.FC<EncouragementModalProps> = ({
   const content = getContent();
 
   return (
-    <div className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-end sm:items-center justify-center p-0 sm:p-4 animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 bg-slate-950/95 flex items-end sm:items-center justify-center p-0 sm:p-4 animate-in fade-in duration-200">
       <div className="w-full max-w-[480px] max-h-[90dvh] sm:max-h-[85vh] rounded-t-3xl sm:rounded-3xl bg-slate-900 border-t sm:border border-emerald-500/40 shadow-2xl overflow-y-auto p-5 sm:p-6 text-left space-y-4 animate-in slide-in-from-bottom-8 duration-300 relative">
         {/* Mobile drag handle */}
         <div className="w-12 h-1.5 bg-slate-700/80 rounded-full mx-auto -mt-1 mb-2 block sm:hidden" />

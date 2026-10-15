@@ -12,13 +12,259 @@
     <meta property="og:description" content="Asistente neuroquímico de reconquista en tiempo real con cronómetro de 72 horas, control de impulsos y scripts estratégicos." />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Instant Session Check: prevent login flash for returning users -->
+    <script>
+      try {
+        var _s = localStorage.getItem('userEmail') || localStorage.getItem('protocolo_72h_v3_userEmail');
+        if (_s) document.documentElement.classList.add('has-saved-user');
+      } catch(e){}
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Zero-JS Critical Paint CSS (renders instantly in under 150ms on mobile) -->
+    <style>
+      body {
+        margin: 0;
+        background-color: #050811;
+        color: #f1f5f9;
+        font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      .static-shell {
+        min-height: 100vh;
+        min-height: 100dvh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        box-sizing: border-box;
+        background-color: #050811;
+        background-image: radial-gradient(circle at 50% 10%, rgba(16, 185, 129, 0.05) 0%, transparent 60%), radial-gradient(circle at 50% 90%, rgba(245, 158, 11, 0.03) 0%, transparent 60%);
+      }
+      .static-card {
+        width: 100%;
+        max-width: 440px;
+        border-radius: 1.5rem;
+        padding: 1.75rem 1.5rem;
+        background-color: #0c1222;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8);
+        text-align: center;
+        box-sizing: border-box;
+      }
+      .static-icon-box {
+        width: 4rem;
+        height: 4rem;
+        margin: 0 auto 1.5rem auto;
+        border-radius: 1rem;
+        background: linear-gradient(135deg, #10b981, #4ade80);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 14px 0 rgba(16, 185, 129, 0.35);
+      }
+      .static-shield-icon {
+        width: 2rem;
+        height: 2rem;
+      }
+      .static-title {
+        font-size: 1.65rem;
+        font-weight: 900;
+        color: #ffffff;
+        margin: 0 0 0.5rem 0;
+        letter-spacing: -0.025em;
+      }
+      .static-subtitle {
+        font-size: 0.85rem;
+        color: #cbd5e1;
+        max-width: 320px;
+        margin: 0 auto 1.5rem auto;
+        line-height: 1.5;
+      }
+      .static-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        text-align: left;
+      }
+      .static-label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: #cbd5e1;
+        display: block;
+        margin-bottom: 0.375rem;
+      }
+      .static-input {
+        width: 100%;
+        padding: 0.875rem 1rem;
+        border-radius: 1rem;
+        background-color: #020617;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        color: #ffffff;
+        font-size: 16px !important;
+        box-sizing: border-box;
+        outline: none;
+      }
+      .static-input:focus {
+        border-color: #34d399;
+      }
+      .static-btn {
+        width: 100%;
+        padding: 1rem 1.25rem;
+        border-radius: 1rem;
+        background: linear-gradient(90deg, #10b981, #34d399);
+        color: #020617;
+        font-weight: 900;
+        font-size: 0.875rem;
+        letter-spacing: 0.025em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 14px 0 rgba(16, 185, 129, 0.3);
+        box-sizing: border-box;
+      }
+      .static-btn:active {
+        transform: scale(0.98);
+      }
+      .static-arrow-icon {
+        width: 1rem;
+        height: 1rem;
+      }
+      .static-footer {
+        margin-top: 1.5rem;
+        padding-top: 0.75rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .static-footer-text {
+        font-size: 0.7rem;
+        color: #94a3b8;
+        margin: 0 0 0.25rem 0;
+      }
+      .static-footer-sub {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.375rem;
+        font-size: 0.65rem;
+        color: #64748b;
+      }
+      .static-check-icon {
+        width: 0.75rem;
+        height: 0.75rem;
+        flex-shrink: 0;
+      }
+      .static-error {
+        display: none;
+        color: #fb7185;
+        font-size: 0.7rem;
+        margin-top: 0.25rem;
+      }
+      /* If user already authenticated, display dark skeleton loader */
+      html.has-saved-user .static-card {
+        display: none;
+      }
+      html.has-saved-user .static-shell::after {
+        content: "Cargando protocolo...";
+        color: #10b981;
+        font-weight: 700;
+        font-size: 0.875rem;
+        letter-spacing: 0.05em;
+      }
+    </style>
   </head>
   <body class="bg-[#050811] text-slate-100 antialiased selection:bg-emerald-500/30 selection:text-emerald-300 min-h-screen">
-    <div id="root"></div>
+    <div id="root">
+      <!-- Static Login Shell rendered before JavaScript initializes -->
+      <div id="static-login-shell" class="static-shell">
+        <div class="static-card">
+          <div class="static-icon-box">
+            <svg class="static-shield-icon" viewBox="0 0 24 24" fill="#020617" stroke="#020617" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.8 17 5 19 5a1 1 0 0 1 1 1z"></path>
+            </svg>
+          </div>
+
+          <div class="static-headings">
+            <h1 class="static-title">Protocolo 72H</h1>
+            <p class="static-subtitle">Tu asistente de reconquista en tiempo real. Empieza tu protocolo en 30 segundos.</p>
+          </div>
+
+          <form id="static-login-form" class="static-form">
+            <div class="static-field">
+              <label class="static-label" for="static-email-input">Tu correo electrónico</label>
+              <input 
+                type="email" 
+                id="static-email-input" 
+                class="static-input" 
+                placeholder="ejemplo: carlos@gmail.com" 
+                required 
+                autocomplete="email"
+              />
+              <div id="static-error" class="static-error"></div>
+            </div>
+
+            <button type="submit" id="static-submit-btn" class="static-btn">
+              <span>⚡ Empezar Mi Protocolo</span>
+              <svg class="static-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+            </button>
+          </form>
+
+          <div class="static-footer">
+            <p class="static-footer-text">Sin contraseñas. Sin verificaciones. Acceso inmediato.</p>
+            <div class="static-footer-sub">
+              <svg class="static-check-icon" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="m9 12 2 2 4-4"></path>
+              </svg>
+              <span>Tus datos se guardan únicamente en este dispositivo</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pre-hydration static submit capture -->
+      <script>
+        (function() {
+          var form = document.getElementById('static-login-form');
+          if (!form) return;
+          form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            var input = document.getElementById('static-email-input');
+            var btn = document.getElementById('static-submit-btn');
+            var val = (input && input.value ? input.value : '').trim();
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(val)) {
+              var err = document.getElementById('static-error');
+              if (err) { err.textContent = 'Por favor ingresa un correo electrónico válido'; err.style.display = 'block'; }
+              return;
+            }
+            try {
+              localStorage.setItem('userEmail', val);
+              localStorage.setItem('protocolo_72h_v3_userEmail', val);
+              var atIdx = val.indexOf('@');
+              var raw = atIdx > 0 ? val.substring(0, atIdx) : 'Usuario';
+              var clean = raw.replace(/[\._\-0-9]/g, ' ').trim();
+              var name = clean ? clean.charAt(0).toUpperCase() + clean.slice(1) : 'Carlos';
+              localStorage.setItem('userName', name);
+              localStorage.setItem('protocolo_72h_v3_userName', name);
+            } catch(e) {}
+            if (btn) {
+              btn.innerHTML = '<span>⚡ Iniciando Protocolo...</span>';
+              btn.style.opacity = '0.9';
+            }
+          });
+        })();
+      </script>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-
