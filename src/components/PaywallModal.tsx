@@ -129,8 +129,10 @@ export const PaywallModal: React.FC<PaywallModalProps> = ({
 
           {/* Primary Action Button (Minimum 48px height) */}
           <div className="pt-1 pb-2">
-            <button
-              onClick={handleCheckout}
+            <a
+              href={CHECKOUT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-full min-h-[48px] py-3.5 px-4 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-400 to-emerald-400 text-slate-950 font-black text-xs sm:text-sm tracking-wide flex items-center justify-center gap-2 shadow-xl shadow-amber-500/25 active:scale-[0.98] transition-all glow-gold"
             >
               <Zap className="w-4 h-4 fill-slate-950" />
@@ -140,7 +142,7 @@ export const PaywallModal: React.FC<PaywallModalProps> = ({
                   : '⚡ DESBLOQUEAR TODO EL PROTOCOLO – $27'}
               </span>
               <ArrowRight className="w-4 h-4" />
-            </button>
+            </a>
           </div>
       </div>
     </div>

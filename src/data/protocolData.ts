@@ -9,7 +9,7 @@ import {
   MiniTrainingStep 
 } from '../types/protocol';
 
-export const CHECKOUT_URL = "https://pay.hotmart.com/protocolo72h-checkout-placeholder";
+export const CHECKOUT_URL = "https://go.centerpag.com/PPU38CQA482";
 export const ACCESS_CODE_VALID = "PROTOCOLO-2026";
 
 export const PHASES_DETAILED: Record<1 | 2 | 3, PhaseDetailedInfo> = {
