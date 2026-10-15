@@ -1,0 +1,6 @@
+{
+  "name": "Protocolo 72H",
+  "description": "Asistente neuroquímico de reconquista en tiempo real con cronómetro de 72 horas, control de impulsos y scripts estratégicos.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
