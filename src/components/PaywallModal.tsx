@@ -6,7 +6,6 @@ interface PaywallModalProps {
   userName: string;
   isOpen: boolean;
   onClose: () => void;
-  onUnlockCompleted: () => void;
   isUnlocked: boolean;
 }
 
@@ -14,7 +13,6 @@ export const PaywallModal: React.FC<PaywallModalProps> = ({
   userName,
   isOpen,
   onClose,
-  onUnlockCompleted,
   isUnlocked,
 }) => {
   // Lock background scroll when open
@@ -129,37 +127,21 @@ export const PaywallModal: React.FC<PaywallModalProps> = ({
           </span>
         </div>
 
-        {/* Primary Action Button (Minimum 48px height) */}
-        <div className="space-y-2 pt-1 pb-2">
-          <button
-            onClick={handleCheckout}
-            className="w-full min-h-[48px] py-3.5 px-4 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-400 to-emerald-400 text-slate-950 font-black text-xs sm:text-sm tracking-wide flex items-center justify-center gap-2 shadow-xl shadow-amber-500/25 active:scale-[0.98] transition-all glow-gold"
-          >
-            <Zap className="w-4 h-4 fill-slate-950" />
-            <span>
-              {userName
-                ? `${userName}, acelera tu resultado – $27`
-                : '⚡ DESBLOQUEAR TODO EL PROTOCOLO – $27'}
-            </span>
-            <ArrowRight className="w-4 h-4" />
-          </button>
-
-          {/* Discreet Evaluation Toggle */}
-          <div className="pt-2 border-t border-white/5 flex items-center justify-between">
-            <span className="text-[10px] text-slate-500">
-              Evaluación / Modo desarrollador:
-            </span>
+          {/* Primary Action Button (Minimum 48px height) */}
+          <div className="pt-1 pb-2">
             <button
-              onClick={() => {
-                onUnlockCompleted();
-                onClose();
-              }}
-              className="min-h-[44px] px-3 py-1.5 rounded-lg border text-xs font-semibold flex items-center justify-center transition-colors active:scale-95 bg-emerald-500/15 border-emerald-500/30 text-emerald-300"
+              onClick={handleCheckout}
+              className="w-full min-h-[48px] py-3.5 px-4 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-400 to-emerald-400 text-slate-950 font-black text-xs sm:text-sm tracking-wide flex items-center justify-center gap-2 shadow-xl shadow-amber-500/25 active:scale-[0.98] transition-all glow-gold"
             >
-              ⚡ Simular Compra Exitosa
+              <Zap className="w-4 h-4 fill-slate-950" />
+              <span>
+                {userName
+                  ? `${userName}, acelera tu resultado – $27`
+                  : '⚡ DESBLOQUEAR TODO EL PROTOCOLO – $27'}
+              </span>
+              <ArrowRight className="w-4 h-4" />
             </button>
           </div>
-        </div>
       </div>
     </div>
   );

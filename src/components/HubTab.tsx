@@ -214,7 +214,7 @@ export const HubTab: React.FC<HubTabProps> = ({
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
             <span>Acceso Completo Activo</span>
           </div>
-        ) : (
+        ) : typeof window !== 'undefined' && sessionStorage.getItem('access_code_locked') === 'true' ? null : (
           <button
             onClick={onOpenAccessCode}
             className="min-h-[44px] px-3 text-xs text-slate-400 hover:text-amber-300 transition-colors inline-flex items-center gap-1.5 active:scale-95"

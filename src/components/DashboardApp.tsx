@@ -39,6 +39,9 @@ export const DashboardApp: React.FC<DashboardAppProps> = ({
   onLogout,
   onUpdateUser,
 }) => {
+  // Developer mode flag: strictly isolated behind ?dev=1 query parameter, never exposed to users
+  const isDevMode = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('dev') === '1';
+
   // --- 1. ACCESS SYSTEM ---
   const [accessLevel, setAccessLevel] = useState<AccessLevel>(() => {
     if (typeof window !== 'undefined') {
@@ -336,7 +339,6 @@ export const DashboardApp: React.FC<DashboardAppProps> = ({
           currentPhase={currentPhase}
           isUnlocked={accessLevel === 'completo'}
           onOpenPanic={() => setIsPanicModalOpen(true)}
-          onToggleDevBar={() => setIsDevBarOpen((prev) => !prev)}
           onOpenProfile={() => setIsProfileModalOpen(true)}
         />
 
@@ -505,9 +507,6 @@ export const DashboardApp: React.FC<DashboardAppProps> = ({
             userName={displayName}
             isOpen={isPaywallModalOpen}
             onClose={() => setIsPaywallModalOpen(false)}
-            onUnlockCompleted={() => {
-              setAccessLevel('completo');
-            }}
             isUnlocked={false}
           />
         </Suspense>
@@ -570,13 +569,12 @@ export const DashboardApp: React.FC<DashboardAppProps> = ({
         </Suspense>
       )}
 
-      {isDevBarOpen && (
+      {isDevMode && isDevBarOpen && (
         <Suspense fallback={null}>
           <DevBar
             isOpen={isDevBarOpen}
             onClose={() => setIsDevBarOpen(false)}
             onSimulateJump={handleSimulateJump}
-            onToggleUnlocked={() => setAccessLevel((prev) => (prev === 'completo' ? 'basico' : 'completo'))}
             isUnlocked={accessLevel === 'completo'}
             onTriggerModal={(type) => setEncouragementType(type)}
             onResetAll={onLogout}

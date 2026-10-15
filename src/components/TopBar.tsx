@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, HeartPulse, Wrench } from 'lucide-react';
+import { HeartPulse } from 'lucide-react';
 import { PhaseNumber } from '../types/protocol';
 
 interface TopBarProps {
@@ -8,8 +8,8 @@ interface TopBarProps {
   currentPhase: PhaseNumber;
   isUnlocked: boolean;
   onOpenPanic: () => void;
-  onToggleDevBar: () => void;
   onOpenProfile: () => void;
+  onToggleDevBar?: () => void;
 }
 
 export const TopBar: React.FC<TopBarProps> = ({
@@ -18,7 +18,6 @@ export const TopBar: React.FC<TopBarProps> = ({
   currentPhase,
   isUnlocked,
   onOpenPanic,
-  onToggleDevBar,
   onOpenProfile,
 }) => {
   const initial = userName ? userName.charAt(0).toUpperCase() : 'U';
@@ -54,7 +53,7 @@ export const TopBar: React.FC<TopBarProps> = ({
           </div>
         </div>
 
-        {/* Right Actions: S.O.S Panic Button + Dev Toolbar Button */}
+        {/* Right Actions: S.O.S Panic Button */}
         <div className="flex items-center gap-2 shrink-0">
           <button
             onClick={onOpenPanic}
@@ -62,14 +61,6 @@ export const TopBar: React.FC<TopBarProps> = ({
           >
             <HeartPulse className="w-3.5 h-3.5 text-rose-400 animate-pulse" />
             <span className="uppercase text-[11px] tracking-wide font-extrabold">S.O.S</span>
-          </button>
-
-          <button
-            onClick={onToggleDevBar}
-            title="Herramientas de simulación rápida"
-            className="p-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white transition-colors"
-          >
-            <Wrench className="w-4 h-4" />
           </button>
         </div>
       </div>

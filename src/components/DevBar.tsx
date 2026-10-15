@@ -5,7 +5,6 @@ interface DevBarProps {
   isOpen: boolean;
   onClose: () => void;
   onSimulateJump: (hours: number) => void;
-  onToggleUnlocked: () => void;
   isUnlocked: boolean;
   onTriggerModal: (type: 'welcome' | 'phase1_done' | 'phase2_done' | 'milestone_phase1') => void;
   onResetAll: () => void;
@@ -16,7 +15,6 @@ export const DevBar: React.FC<DevBarProps> = ({
   isOpen,
   onClose,
   onSimulateJump,
-  onToggleUnlocked,
   isUnlocked,
   onTriggerModal,
   onResetAll,
@@ -115,31 +113,30 @@ export const DevBar: React.FC<DevBarProps> = ({
           </div>
         </div>
 
-        {/* Unlock Toggle */}
+        {/* Read-Only Status (Unlocking only via ?access=protocolo or real code) */}
         <div className="pt-1 border-t border-white/5 flex items-center justify-between">
           <span className="text-xs text-slate-300">
-            Scripts Desbloqueados:
+            Nivel de Acceso:
           </span>
-          <button
-            onClick={onToggleUnlocked}
-            className={`py-1 px-2.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all ${
+          <span
+            className={`py-1 px-2.5 rounded-lg text-xs font-bold flex items-center gap-1.5 ${
               isUnlocked
-                ? 'bg-emerald-500 text-slate-950'
-                : 'bg-white/10 text-slate-300 hover:text-white'
+                ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
+                : 'bg-white/10 text-slate-400 border border-white/10'
             }`}
           >
             {isUnlocked ? (
               <>
-                <Unlock className="w-3 h-3" />
-                <span>Desbloqueado (89%)</span>
+                <Unlock className="w-3 h-3 text-emerald-400" />
+                <span>Completo (89%)</span>
               </>
             ) : (
               <>
-                <Lock className="w-3 h-3" />
-                <span>Bloqueado (Gratis)</span>
+                <Lock className="w-3 h-3 text-slate-400" />
+                <span>Básico</span>
               </>
             )}
-          </button>
+          </span>
         </div>
 
         {/* Reset All */}
